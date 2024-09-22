@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
+
 import Labs from "./Labs";
-import { HashRouter, Route, Routes } from "react-router-dom";
-
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 function App() {
-  return (
-      <HashRouter>
-          <Routes>
-              <Route path="/Labs/*" element={<Labs />} />
-          </Routes>
-      <div>
-        <Labs />
-      </div>
-      </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <div>
+                <Routes>
+                    <Route path="/" element={<Navigate to="Labs" />} />
+                    <Route path="/Labs/*" element={<Labs />} />
+                </Routes>
+            </div>
+        </HashRouter>
+    );
 }
-
 export default App;
