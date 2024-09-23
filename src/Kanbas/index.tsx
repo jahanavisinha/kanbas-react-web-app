@@ -5,6 +5,7 @@ import Signup from "./Account/Signup";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
+
 export default function Kanbas() {
     return (
         <div id="wd-kanbas">
