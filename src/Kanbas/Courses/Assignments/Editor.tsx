@@ -2,7 +2,7 @@ export default function AssignmentEditor() {
     return (
         <div id="wd-assignments-editor">
             <h3 style={{ fontWeight: "bold" }}>Assignment Name</h3>
-            <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
+            <input id="wd-name" value="A1" /><br /><br />
 
             <textarea id="wd-description">
                 The assignment is available online. Submit a link to the landing page of your

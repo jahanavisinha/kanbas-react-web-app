@@ -13,9 +13,9 @@ export default function Kanbas() {
             {/*<table>*/}
             {/*    <tr>*/}
             {/*        <td valign="top">*/}
-                        <KanbasNavigation />
-                    {/*</td>*/}
-                    {/*<td valign="top">*/}
+            <KanbasNavigation />
+            {/*</td>*/}
+            {/*<td valign="top">*/}
             <div className="wd-main-content-offset p-3">
                 <Routes>
                     <Route path="/" element={<Navigate to="/Kanbas/Account"/>}/>
@@ -32,4 +32,3 @@ export default function Kanbas() {
         </div>
     );
 }
-
