@@ -1,0 +1,26 @@
+.account-container {
+    display: flex;
+}
+
+.account-nav {
+    width: 200px;
+    padding: 20px;
+}
+
+.nav-item {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: red; /* Changed color to red */
+}
+
+.nav-item.active {
+    font-weight: bold;
+    border-left: 3px solid #333;
+    padding-left: 10px;
+}
+
+.account-content {
+    flex-grow: 1;
+    padding: 20px;
+}

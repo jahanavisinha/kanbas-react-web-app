@@ -1,0 +1,31 @@
+.signin-container {
+    max-width: 300px;
+    margin-left: 20px;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.signup-link {
+    color: #4285f4;
+    text-decoration: none;
+    text-align: center;
+}

@@ -2,7 +2,7 @@ import { BsGripVertical, BsSearch } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { MdOutlineEditNote } from "react-icons/md";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
 export default function Assignments() {
     return (
