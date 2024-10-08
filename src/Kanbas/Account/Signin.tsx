@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Signin.css"; // Make sure this CSS file exists and is properly styled
+import "./Signin.css";
 
 export default function Signin() {
     return (

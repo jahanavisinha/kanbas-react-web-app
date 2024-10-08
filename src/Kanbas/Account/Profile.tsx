@@ -1,23 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Account.css";
+
 export default function Profile() {
     return (
-        <div id="wd-profile-screen">
-            <h3>Profile</h3>
-            <input defaultValue="alice" placeholder="username" className="wd-username"/><br/>
-            <input defaultValue="123"   placeholder="password" type="password"
-                   className="wd-password" /><br/>
-            <input defaultValue="Alice" placeholder="First Name" id="wd-firstname" /><br/>
-            <input defaultValue="Wonderland" placeholder="Last Name" id="wd-lastname" /><br/>
-            <input defaultValue="2000-01-01" type="date" id="wd-dob" /><br/>
-            <input defaultValue="alice@wonderland" type="email" id="wd-email" /><br/>
-            <select defaultValue="FACULTY" id="wd-role">
-                <option value="USER">User</option>
-                <option value="ADMIN">Admin</option>
-                <option value="FACULTY">Faculty</option>
-                <option value="STUDENT">Student</option>
-            </select><br/>
-            <Link to="/Kanbas/Account/Signin" >Sign out</Link>
+        <div className="account-form-container">
+            <h2>Profile</h2>
+            <div className="account-form">
+                <input className="form-control" defaultValue="alice" placeholder="username" />
+                <input className="form-control" defaultValue="123" placeholder="password" type="password" />
+                <input className="form-control" defaultValue="Alice" placeholder="First Name" />
+                <input className="form-control" defaultValue="Wonderland" placeholder="Last Name" />
+                <input className="form-control" defaultValue="2000-01-01" type="date" />
+                <input className="form-control" defaultValue="alice@wonderland" type="email" placeholder="Email" />
+                <select className="form-control" defaultValue="FACULTY">
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="FACULTY">Faculty</option>
+                    <option value="STUDENT">Student</option>
+                </select>
+                <Link to="/Kanbas/Account/Signin" className="btn btn-danger">
+                    Sign out
+                </Link>
+            </div>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, Link } from "react-router-dom";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Profile from "./Profile";
-import "./Account.css"; // We'll create this CSS file for layout styling
+import "./Account.css";
 
 export default function Account() {
     return (

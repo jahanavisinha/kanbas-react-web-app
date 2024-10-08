@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Account.css";
+
 export default function Signup() {
     return (
-        <div id="wd-signup-screen">
-            <h3>Sign up</h3>
-            <input placeholder="username" className="wd-username" /><br/>
-            <input placeholder="password" type="password" className="wd-password" /><br/>
-            <input placeholder="verify password" type="password" className="wd-password-verify" /><br/>
-            <Link  to="/Kanbas/Account/Profile" > Sign up </Link><br />
-            <Link  to="/Kanbas/Account/Signin" >Sign in</Link>
+        <div className="account-form-container">
+            <h2>Sign up</h2>
+            <div className="account-form">
+                <input className="form-control" placeholder="username" />
+                <input className="form-control" placeholder="password" type="password" />
+                <input className="form-control" placeholder="verify password" type="password" />
+                <Link to="/Kanbas/Account/Profile" className="btn btn-primary btn-block">
+                    Sign up
+                </Link>
+                <Link to="/Kanbas/Account/Signin" className="form-link">Sign in</Link>
+            </div>
         </div>
-    );}
+    );
+}

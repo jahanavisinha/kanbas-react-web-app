@@ -11,7 +11,7 @@
     display: block;
     padding: 10px 0;
     text-decoration: none;
-    color: red; /* Changed color to red */
+    color: red;
 }
 
 .nav-item.active {
@@ -23,4 +23,60 @@
 .account-content {
     flex-grow: 1;
     padding: 20px;
+}
+
+.account-form-container {
+    max-width: 300px;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn {
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #4285f4;
+}
+
+.btn-primary:hover {
+    background-color: #3367d6;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.form-link {
+    color: #4285f4;
+    text-decoration: none;
+    text-align: center;
+}
+
+.form-link:hover {
+    text-decoration: underline;
 }
