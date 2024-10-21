@@ -1,79 +1,58 @@
+import React from 'react';
 import { useParams } from "react-router";
-import { BsGripVertical, BsSearch } from "react-icons/bs";
+import { BsThreeDotsVertical, BsCheckCircleFill } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { Link } from "react-router-dom";
-import LessonControlButtons from "../Modules/LessonControlButtons";
 import * as db from "../../Database";
 import './Assignments.css';
-import { format } from 'date-fns';
 
 export default function Assignments() {
     const { cid } = useParams(); // Retrieve course ID
     const assignments = db.assignments; // Load assignments from the database
 
     return (
-        <div className="container-fluid">
-            {/* AssignmentsControls */}
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                {/* Search Field */}
-                <div className="input-group" style={{ width: "300px" }}>
-                    <span className="input-group-text bg-white border-end-0">
-                        <BsSearch />
-                    </span>
-                    <input
-                        id="wd-search-assignment"
-                        className="form-control border-start-0"
-                        placeholder="Search..."
-                    />
+        <div className="container-fluid p-4">
+            {/* Assignments Header */}
+            <div className="d-flex justify-content-between align-items-center mb-4 bg-light p-3 border">
+                <div className="d-flex align-items-center">
+                    <BsThreeDotsVertical className="me-3" />
+                    <h4 className="mb-0">▼ ASSIGNMENTS</h4>
                 </div>
-
-                {/* Buttons Floated to Right */}
-                <div className="d-flex justify-content-end">
-                    <button className="btn btn-secondary me-2">
-                        <FaPlus /> Group
-                    </button>
-                    <button className="btn btn-danger">
-                        <FaPlus /> Assignment
-                    </button>
+                <div className="d-flex align-items-center">
+                    <span className="badge bg-light text-dark border me-2 px-3 py-2 rounded-pill">40% of Total</span>
+                    <FaPlus className="me-3" />
+                    <BsThreeDotsVertical />
                 </div>
             </div>
 
-            {/* Assignments Table */}
-            <ul id="wd-assignments" className="list-group rounded-0">
+            {/* Assignments List */}
+            <ul className="list-group assignments-list">
                 {assignments
-                    .filter((assignment) => assignment.course === cid) // Filter assignments by course ID
+                    .filter((assignment) => assignment.course === cid)
                     .map((assignment) => (
-                        <li key={assignment._id} className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
-                            <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center justify-content-between">
+                        <li key={assignment._id} className="list-group-item border-start-0 border-end-0 py-3">
+                            <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <BsGripVertical className="me-2 fs-3" />
-                                    <span>{assignment.title}</span>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <LessonControlButtons />
-                                    <div className="badge bg-light text-dark border border-secondary rounded-circle p-2 ms-2">
-                                        40% of Total
-                                    </div>
-                                </div>
-                            </div>
-                            <ul className="wd-assignments-list list-group rounded-0">
-                                <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center assignment-border">
-                                    <BsGripVertical className="me-2 fs-3" />
-                                    <MdOutlineEditNote className="ms fs-1" />
-                                    <div className="flex-grow-1">
-                                        <Link
-                                            to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                                            className="text-dark text-decoration-none fs-5 fw-bold"
-                                        >
+                                    <BsThreeDotsVertical className="me-3 text-secondary" />
+                                    <MdOutlineEditNote className="me-3 text-success fs-3" />
+                                    <div>
+                                        <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="text-dark text-decoration-none fw-bold">
                                             {assignment.title}
                                         </Link>
-                                        <div className="text-muted">
-                                            <span className="text-danger">Multiple Modules</span> | Not available until {format(new Date(assignment.availableFrom), 'MMMM d, yyyy h:mm a')} | Due {format(new Date(assignment.dueDate), 'MMMM d, yyyy h:mm a')} | {assignment.points} pts
+                                        <div>
+                                            <span className="text-danger">Multiple Modules</span>
+                                            <span className="text-secondary"> | Not available until {new Date(assignment.availableFrom).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} | </span>
+                                            <span className="text-secondary">Due {new Date(assignment.dueDate).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} | </span>
+                                            <span className="text-secondary">{assignment.points} pts</span>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                    <BsCheckCircleFill className="text-success me-3" />
+                                    <BsThreeDotsVertical className="text-secondary" />
+                                </div>
+                            </div>
                         </li>
                     ))}
             </ul>

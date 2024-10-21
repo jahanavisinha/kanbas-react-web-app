@@ -3,3 +3,25 @@
     border-left: 5px solid green;
     padding-left: 10px; /* Add some space between the border and the text */
 }
+
+
+/* Target only the assignment list items */
+.assignments-list .list-group-item {
+    border-left: 4px solid #28a745 !important; /* Green left border */
+    border-right: none;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Remove top border from the first item and bottom border from the last item */
+.assignments-list .list-group-item:first-child {
+    border-top: none;
+}
+
+.assignments-list .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.badge {
+    font-weight: normal;
+}
