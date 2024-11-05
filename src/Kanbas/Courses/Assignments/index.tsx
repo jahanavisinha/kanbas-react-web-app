@@ -1,65 +1,96 @@
 import React, { useState } from 'react';
-import { useParams } from "react-router";
-import { useSelector, useDispatch } from "react-redux"
-import { BsThreeDotsVertical, BsCheckCircleFill } from "react-icons/bs";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {BsThreeDotsVertical, BsCheckCircleFill, BsPlus, BsGripVertical} from "react-icons/bs";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { Link } from "react-router-dom";
-import * as db from "../../Database";
 import { deleteAssignment } from "./reducer";
 import AssignmentsControls from "./AssignmentsControls";
 import './Assignments.css';
-
+import {FaMagnifyingGlass} from "react-icons/fa6";
+import {GoTriangleDown} from "react-icons/go";
+import {GrNotes} from "react-icons/gr";
+import LessonControlButtons from "../Modules/LessonControlButtons";
+import SectionControl from "./SectionControl";
+import {assignments} from "../../Database";
 
 export default function Assignments() {
-    const { cid } = useParams(); // Retrieve course ID
-    const assignments = db.assignments; // Load assignments from the database
-
+    const { cid } = useParams();
+    const navigate = useNavigate();
     return (
-        <div className="container-fluid p-4">
-            {/* Assignments Header */}
-            <div className="d-flex justify-content-between align-items-center mb-4 bg-light p-3 border">
-                <div className="d-flex align-items-center">
-                    <BsThreeDotsVertical className="me-3" />
-                    <h4 className="mb-0">▼ ASSIGNMENTS</h4>
+        <div>
+            {}
+            <div className="wd-assignment-top text-nowrap row mt-3 mb-3">
+                <div className="col-4 d-flex">
+                    <div className="input-group">
+                        <label htmlFor="wd-assignment-search-box" className="form-label input-group-text">
+                            <FaMagnifyingGlass />
+                        </label>
+                        <input
+                            className="input-group-text rounded-1 form-control"
+                            type="text"
+                            id="wd-assignment-search-box"
+                            placeholder="Search..."
+                        />
+                    </div>
                 </div>
-                <div className="d-flex align-items-center">
-                    <span className="badge bg-light text-dark border me-2 px-3 py-2 rounded-pill">40% of Total</span>
-                    <FaPlus className="me-3" />
-                    <BsThreeDotsVertical />
+
+                <div className="col-8 d-flex justify-content-end align-text-end">
+                    <button className="btn btn-danger text-white rounded-1 me-1" onClick={ () => navigate(`/Kanbas/Courses/${cid}/Assignments/${new Date().getTime().toString()}`) }>
+                        <BsPlus className="text-white" />
+                        Assignment
+                    </button>
+                    <button className="btn btn-secondary text-dark rounded-1 me-1">
+                        <BsPlus /> Group
+                    </button>
                 </div>
             </div>
+            <div>
+                {/* assignment section title */}
+                <ul className="wd-assignment-list list-group-item p-0 mb-5 fs-5 border-gray">
+                    <div className="wd-assignment-title p-3 ps-2 bg-secondary">
+                        <BsGripVertical className="me-2 fs-3" />
+                        <GoTriangleDown />
+                        ASSIGNMENTS {/* can make this part more data driven once json format is finalized */}
+                        <SectionControl
+                            percent="100"
+                        />
+                    </div>
+                    <li className="list-group-item">
 
-            {/* Assignments List */}
-            <ul className="list-group assignments-list">
-                {assignments
-                    .filter((assignment) => assignment.course === cid)
-                    .map((assignment) => (
-                        <li key={assignment._id} className="list-group-item border-start-0 border-end-0 py-3">
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center">
-                                    <BsThreeDotsVertical className="me-3 text-secondary" />
-                                    <MdOutlineEditNote className="me-3 text-success fs-3" />
-                                    <div>
-                                        <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="text-dark text-decoration-none fw-bold">
-                                            {assignment.title}
-                                        </Link>
-                                        <div>
-                                            <span className="text-danger">Multiple Modules</span>
-                                            <span className="text-secondary"> | Not available until {new Date(assignment.availableFrom).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} | </span>
-                                            <span className="text-secondary">Due {new Date(assignment.dueDate).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} | </span>
-                                            <span className="text-secondary">{assignment.points} pts</span>
+                        {/* assignment list */}
+                        <ul className="wd-assignments list-group rounded-0">
+                            {assignments
+                                .map((assignment: any) => (
+                                    <li className="wd-assignment-list-item list-group-item p-3 ps-1">
+                                        <div className="row">
+                                            <div className="col-2">
+                                                <BsGripVertical className="me-2 fs-3" />
+                                                <GrNotes className="me-2 fs-3 text-success" />
+                                            </div>
+                                            <div className="col-8 text-start">
+                                                <a className="wd-assignment-link" href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                                                    {assignment.title}
+                                                </a>
+                                                <p>
+                                                    Multiple Modules {/* not sure what this is to be honest*/}
+                                                    | <b>Not available until</b> {assignment.available_from}
+                                                    | <b>Due</b> {assignment.due_date}
+                                                    | {assignment.points}pts
+                                                </p>
+                                            </div>
+                                            <div className="col-2">
+                                                <LessonControlButtons />
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <BsCheckCircleFill className="text-success me-3" />
-                                    <BsThreeDotsVertical className="text-secondary" />
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-            </ul>
+                                    </li>
+                                ))}
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
         </div>
     );
 }

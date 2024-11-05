@@ -1,13 +1,10 @@
-import { FaPlus } from "react-icons/fa"; // import plus icon
+import { FaPlus } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function AssignmentsControls() {
+export default function AssignmentsControls({ handleNewAssignment }: { handleNewAssignment: () => void }) {
     const navigate = useNavigate();
     const { cid } = useParams();
 
-    const handleNewAssignment = () => {
-        navigate(`/Kanbas/Courses/${cid}/Assignments/new`);
-    };
     return (
         <div className="d-flex justify-content-between align-items-center mb-4">
             <input
@@ -17,10 +14,7 @@ export default function AssignmentsControls() {
                 style={{ width: "300px" }}
             />
             <div>
-                <button className="btn btn-danger me-2">
-                    <FaPlus /> Group
-                </button>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={handleNewAssignment}>
                     <FaPlus /> Assignment
                 </button>
             </div>
