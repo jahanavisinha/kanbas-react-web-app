@@ -17,6 +17,17 @@ export default function Dashboard() {
     const deleteCourse = (courseId: string) => {
         setCourses(courses.filter((course) => course._id !== courseId));
     };
+    const updateCourse = () => {
+        setCourses(
+            courses.map((c) => {
+                if (c._id === course._id) {
+                    return course;
+                } else {
+                    return c;
+                }
+            })
+        );
+    };
 
 
     return (
@@ -27,12 +38,16 @@ export default function Dashboard() {
                 <button className="btn btn-primary float-end"
                         id="wd-add-new-course-click"
                         onClick={addNewCourse}> Add </button>
+                <button className="btn btn-warning float-end me-2"
+                        onClick={updateCourse} id="wd-update-course-click">
+                    Update
+                </button>
             </h5>
             <br/>
             <input value={course.name} className="form-control mb-2"
 
 
-                   onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
+                   onChange={(e) => setCourse({...course, name: e.target.value }) } />
             <textarea value={course.description} className="form-control"
                       onChange={(e) => setCourse({ ...course, description: e.target.value }) }
             />
@@ -63,6 +78,15 @@ export default function Dashboard() {
                                                 id="wd-delete-course-click">
                                             Delete
                                         </button>
+                                        <button id="wd-edit-course-click"
+                                                onClick={(event) => {
+                                                    event.preventDefault();
+                                                    setCourse(course);
+                                                }}
+                                                className="btn btn-warning me-2 float-end">
+                                            Edit
+                                        </button>
+
                                     </div>
                                 </Link>
                             </div>
