@@ -3,8 +3,10 @@ import GreenCheckmark from "./GreenCheckmark";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import ModuleEditor from "./ModuleEditor";
 
-export default function ModulesControls({ moduleName, setModuleName, addModule }:
-                                            { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) {
+export default function ModulesControls(
+    { moduleName, setModuleName, addModule }:
+        { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }
+) {
     return (
         <div id="wd-modules-controls" className="text-nowrap">
             <button className="btn btn-lg btn-danger me-1 float-end" id="wd-add-module-btn"
