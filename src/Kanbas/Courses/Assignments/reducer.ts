@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as db from "../../Database";
+import { assignments } from "../../Database";
 
 const initialState = {
-    assignments: db.assignments,
+    assignments: assignments,
 };
 
 export type Assignment = {
@@ -20,48 +20,34 @@ export type AssignmentsState = {
     assignments: Assignment[];
 };
 
-export const addAssignment = (assignment: Assignment) => ({
-    type: "add-assignment",
-    assignment,
+const assignmentsSlice = createSlice({
+    name: "assignments",
+    initialState,
+    reducers: {
+        addAssignment: (state, { payload: assignment }) => {
+            const newAssignment: Assignment = {
+                _id: new Date().getTime().toString(),
+                title: assignment.title,
+                course: assignment.course,
+                description: assignment.description,
+                points: assignment.points,
+                dueDate: assignment.dueDate,
+                availableFrom: assignment.availableFrom,
+                availableUntil: assignment.availableUntil,
+            };
+            state.assignments = [...state.assignments, newAssignment];
+        },
+        deleteAssignment: (state, { payload: assignmentId }) => {
+            state.assignments = state.assignments.filter((a) => a._id !== assignmentId);
+        },
+        updateAssignment: (state, { payload: assignment }) => {
+            state.assignments = state.assignments.map((a) =>
+                a._id === assignment._id ? assignment : a
+            );
+        },
+    },
 });
 
-export const deleteAssignment = (assignmentId: string) => ({
-    type: "delete-assignment",
-    assignmentId,
-});
-
-export const updateAssignment = (assignment: Assignment) => ({
-    type: "update-assignment",
-    assignment,
-});
-
-const assignmentsReducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case "add-assignment":
-            return {
-                ...state,
-                assignments: [...state.assignments, action.assignment],
-            };
-
-        case "delete-assignment":
-            return {
-                ...state,
-                assignments: state.assignments.filter(
-                    (assignment) => assignment._id !== action.assignmentId
-                ),
-            };
-
-        case "update-assignment":
-            return {
-                ...state,
-                assignments: state.assignments.map((assignment) =>
-                    assignment._id === action.assignment._id ? action.assignment : assignment
-                ),
-            };
-
-        default:
-            return state;
-    }
-};
-
-export default assignmentsReducer;
+export const { addAssignment, deleteAssignment, updateAssignment } =
+    assignmentsSlice.actions;
+export default assignmentsSlice.reducer;
