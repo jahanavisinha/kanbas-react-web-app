@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux"
 import { BsThreeDotsVertical, BsCheckCircleFill } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTrash } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { Link } from "react-router-dom";
 import * as db from "../../Database";
+import { deleteAssignment } from "./reducer";
+import AssignmentsControls from "./AssignmentsControls";
 import './Assignments.css';
+
 
 export default function Assignments() {
     const { cid } = useParams(); // Retrieve course ID

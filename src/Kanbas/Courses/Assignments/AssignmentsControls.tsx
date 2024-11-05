@@ -1,6 +1,13 @@
 import { FaPlus } from "react-icons/fa"; // import plus icon
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function AssignmentsControls() {
+    const navigate = useNavigate();
+    const { cid } = useParams();
+
+    const handleNewAssignment = () => {
+        navigate(`/Kanbas/Courses/${cid}/Assignments/new`);
+    };
     return (
         <div className="d-flex justify-content-between align-items-center mb-4">
             <input
