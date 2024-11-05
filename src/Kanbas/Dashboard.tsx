@@ -14,6 +14,11 @@ export default function Dashboard() {
         setCourses([...courses, newCourse ]);
     };
 
+    const deleteCourse = (courseId: string) => {
+        setCourses(courses.filter((course) => course._id !== courseId));
+    };
+
+
     return (
         <div className="p-4" id="wd-dashboard">
             <h1 id="wd-dashboard-title">Dashboard</h1>
@@ -51,6 +56,13 @@ export default function Dashboard() {
                                            style={{maxHeight: 100}}>
                                             {course.description} </p>
                                         <button className="btn btn-primary"> Go</button>
+                                        <button onClick={(event) => {
+                                            event.preventDefault();
+                                            deleteCourse(course._id);
+                                        }} className="btn btn-danger float-end"
+                                                id="wd-delete-course-click">
+                                            Delete
+                                        </button>
                                     </div>
                                 </Link>
                             </div>
