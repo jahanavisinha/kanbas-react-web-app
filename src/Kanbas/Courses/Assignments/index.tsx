@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAssignment } from "./reducer";
 import Button from "./Button";
 import DeleteAssignment from "./DeleteAssignment";
-import GreenCheckmark from "../Modules/GreenCheckmark";
-import { IoEllipsisVertical } from "react-icons/io5";
 import AssignmentControls from "./AssignmentsControls";
 
 export default function Assignments(
@@ -20,8 +18,7 @@ export default function Assignments(
     const { currentUser } = useSelector((state: any) => state.accountReducer);
 
     return (
-        <div>
-            {/* assignment top */}
+        <div>{}
             <div className="wd-assignment-top text-nowrap row mt-3 mb-3">
                 <div className="col-4 d-flex">
                     <div className="input-group">
@@ -32,7 +29,7 @@ export default function Assignments(
                             className="input-group-text rounded-1 form-control"
                             type="text"
                             id="wd-assignment-search-box"
-                            placeholder="Search..."
+                            placeholder="Search"
                         />
                     </div>
                 </div>
@@ -48,20 +45,17 @@ export default function Assignments(
                     </div>
                     : <div></div>}
             </div>
-            <div>
-                {/* assignment section title */}
+            <div>{}
                 <ul className="wd-assignment-list list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-assignment-title p-3 ps-2 bg-secondary">
                         {currentUser.role === "FACULTY" ? <BsGripVertical className="me-2 fs-3" /> : <div></div> }
                         <GoTriangleDown />
-                        ASSIGNMENTS {/* can make this part more data driven once json format is finalized */}
+                        ASSIGNMENTS {}
                         <SectionControl
                             percent="100"
                         />
                     </div>
-                    <li className="list-group-item">
-
-                        {/* assignment list */}
+                    <li className="list-group-item">{}
                         <ul className="wd-assignments list-group rounded-0">
                             {assignments
                                 .filter((a:any) => (a.course === cid))
@@ -84,7 +78,7 @@ export default function Assignments(
                                                     </div> : <u><b>{assignment.title}</b></u>
                                                 }
                                                 <p>
-                                                    Multiple Modules {/* not sure what this is to be honest*/}
+                                                    Multiple Modules {}
                                                     | <b>Not available until</b> {assignment.available_from}
                                                     | <b>Due</b> {assignment.due_date}
                                                     | {assignment.points}pts
