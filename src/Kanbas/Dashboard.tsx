@@ -10,7 +10,13 @@ export default function Dashboard(
         updateCourse: () => void; }
 ) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const { enrollments } = db
+    const { enrollments } = db;
+    let enrolledCourses = courses.filter(
+        (course) => enrollments.some(
+            (enrollment) =>
+                enrollment.user === currentUser._id &&
+                enrollment.course === course._id
+        ))
 
     return (
         <div className="p-4" id="wd-dashboard">

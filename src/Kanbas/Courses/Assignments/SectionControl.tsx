@@ -1,7 +1,7 @@
 import { BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { useSelector } from "react-redux";
-export default function SectionControlButton(
+export default function SectionControl(
     {percent} : {percent: string}
 ) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);

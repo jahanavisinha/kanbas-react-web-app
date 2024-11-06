@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import './Assignments.css';
 
 
-export default function AssignmentEditor() {
+export default function Editor() {
     const { cid, aid } = useParams(); // Get course ID and assignment ID from URL params
     const assignment = db.assignments.find((a) => a._id === aid && a.course === cid); // Find the correct assignment
 
