@@ -1,6 +1,6 @@
 export default function AssignmentEditor({ dialogTitle, moduleName, setAssignmentName, availableDate, dueDate, points, addAssignment }:
-                                            { dialogTitle: string; moduleName: string; setAssignmentName: (name: string) => void; availableDate: string;
-                                                dueDate: string; points: number; addAssignment: () => void; }) {
+                                             { dialogTitle: string; moduleName: string; setAssignmentName: (name: string) => void; availableDate: string;
+                                                 dueDate: string; points: number; addAssignment: () => void; }) {
     return (
         <div id="wd-add-module-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
             <div className="modal-dialog">
@@ -25,4 +25,3 @@ export default function AssignmentEditor({ dialogTitle, moduleName, setAssignmen
         </div>
     );
 }
-    
