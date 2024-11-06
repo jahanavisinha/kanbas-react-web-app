@@ -1,23 +1,23 @@
+import { useSelector } from "react-redux";
 import Modules from "../Modules";
 import CourseStatus from "./Status";
+
 export default function Home() {
+    const { currentUser } = useSelector( (state: any) => state.accountReducer );
     return (
-        // <table id="wd-home">
-        //     <tr>
-        //         <td valign="top">
-        <div className="d-flex" id="wd-home">
-            <div className="flex-fill">
-                <Modules/>
-            </div>
-            {/*        */}
-            {/*</td>*/}
-            {/*<td valign="top">*/}
-            <div className="d-none d-md-block">
-                <CourseStatus/>
+        <div>
+            <h2>Home</h2>
+            <div className="d-flex" id="wd-home">
+                <div className="flex-fill">
+                    <Modules />
+                </div>
+                {currentUser.role === "FACULTY" ?
+                    <div className="d-none d-xxl-block">
+                        <CourseStatus />
+                    </div>
+                    : <div></div>
+                }
             </div>
         </div>
-// </td>
-//         </tr>
-// </table>
-);
+    )
 }

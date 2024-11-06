@@ -2,8 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as db from "./Database";
 import { useEffect, useState } from "react";
-import { enroll, unenroll }
-    from "./reducer";
+import { enroll, unenroll } from "./reducer";
 export default function Dashboard(
     { courses, course, setCourse, addNewCourse,
         deleteCourse, updateCourse }: {
@@ -35,7 +34,7 @@ export default function Dashboard(
             } else {
                 setDisplayedCourses(courses);
             }
-        }, [showEnrolled, enrollments]
+        }, [showEnrolled, enrollments, courses, currentUser._id]
     )
 
 
