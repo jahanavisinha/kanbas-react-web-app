@@ -9,6 +9,7 @@ import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
 import ProtectedCourseRoute from "./ProtectedCourseRoute";
+import Session from "./Account/Session";
 export default function Kanbas() {
     const [courses, setCourses] = useState<any[]>(db.courses);
     const [course, setCourse] = useState<any>({
@@ -35,6 +36,7 @@ export default function Kanbas() {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
 
     return (
+        <Session>
         <div id="wd-kanbas">
             <KanbasNavigation />
             <div className="wd-main-content-offset p-3">
@@ -61,5 +63,6 @@ export default function Kanbas() {
                 </Routes>
             </div>
         </div>
+        </Session>
     )
 }
