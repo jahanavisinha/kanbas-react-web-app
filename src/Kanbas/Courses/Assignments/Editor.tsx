@@ -1,7 +1,6 @@
 import { IoIosArrowDown } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { LuCalendarDays } from "react-icons/lu";
-import * as db from "../../Database";
 import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";

@@ -1,24 +1,39 @@
-import { FaMagnifyingGlass, FaTrash } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { GoTriangleDown } from "react-icons/go";
 import SectionControl from "./SectionControl";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
 import Button from "./Button";
 import DeleteAssignment from "./DeleteAssignment";
 import AssignmentControls from "./AssignmentsControls";
+import { useEffect } from "react";
+import {getAssignmentsFromCourse} from "./client";
 
-export default function Assignments(
-) {
+export default function Assignments() {
     const { cid } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { assignments } = useSelector((state: any) => state.assignmentReducer);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
 
+    const fetchAssignments = async () => {
+        if (!cid) return;
+        try {
+            const loadedAssignments = await getAssignmentsFromCourse(cid);
+            dispatch(setAssignments(loadedAssignments));
+        } catch (error) {
+            console.error("Error fetching assignments:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAssignments();
+    }, [dispatch, cid]);
+
     return (
-        <div>{}
+        <div>
             <div className="wd-assignment-top text-nowrap row mt-3 mb-3">
                 <div className="col-4 d-flex">
                     <div className="input-group">
@@ -29,71 +44,80 @@ export default function Assignments(
                             className="input-group-text rounded-1 form-control"
                             type="text"
                             id="wd-assignment-search-box"
-                            placeholder="Search"
+                            placeholder="Search..."
                         />
                     </div>
                 </div>
-                {currentUser.role === "FACULTY" ?
+                {currentUser.role === "FACULTY" && (
                     <div className="col-8 d-flex justify-content-end align-text-end faculty-access">
-                        <button className="btn btn-danger text-white rounded-1 me-1" onClick={ () => navigate(`/Kanbas/Courses/${cid}/Assignments/${new Date().getTime().toString()}`) }>
-                            {<BsPlus className="text-white" />}
+                        <button
+                            className="btn btn-danger text-white rounded-1 me-1"
+                            onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/${new Date().getTime().toString()}`)}
+                        >
+                            <BsPlus className="text-white" />
                             Assignment
                         </button>
                         <button className="btn btn-secondary text-dark rounded-1 me-1">
                             <BsPlus /> Group
                         </button>
                     </div>
-                    : <div></div>}
+                )}
             </div>
-            <div>{}
+
+            <div>
                 <ul className="wd-assignment-list list-group-item p-0 mb-5 fs-5 border-gray">
                     <div className="wd-assignment-title p-3 ps-2 bg-secondary">
-                        {currentUser.role === "FACULTY" ? <BsGripVertical className="me-2 fs-3" /> : <div></div> }
+                        {currentUser.role === "FACULTY" && <BsGripVertical className="me-2 fs-3" />}
                         <GoTriangleDown />
-                        ASSIGNMENTS {}
-                        <SectionControl
-                            percent="100"
-                        />
+                        ASSIGNMENTS
+                        <SectionControl percent="100" />
                     </div>
-                    <li className="list-group-item">{}
+                    <li className="list-group-item">
                         <ul className="wd-assignments list-group rounded-0">
                             {assignments
-                                .filter((a:any) => (a.course === cid))
+                                .filter((a: any) => a.course === cid)
                                 .map((assignment: any) => (
-                                    <li className="wd-assignment-list-item list-group-item p-3 ps-1">
+                                    <li key={assignment._id} className="wd-assignment-list-item list-group-item p-3 ps-1">
                                         <div className="row align-items-center">
                                             <div className="col-2">
-                                                { currentUser.role === "FACULTY" ?
+                                                {currentUser.role === "FACULTY" && (
                                                     <div className="faculty-access">
                                                         <Button />
                                                     </div>
-                                                    : <div></div>}
+                                                )}
                                             </div>
                                             <div className="col-8 text-start">
-                                                {currentUser.role === "FACULTY" ?
+                                                {currentUser.role === "FACULTY" ? (
                                                     <div className="faculty-access">
-                                                        <a className="wd-assignment-link" href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                                                        <a
+                                                            className="wd-assignment-link"
+                                                            href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                                                        >
                                                             {assignment.title}
                                                         </a>
-                                                    </div> : <u><b>{assignment.title}</b></u>
-                                                }
+                                                    </div>
+                                                ) : (
+                                                    <u>
+                                                        <b>{assignment.title}</b>
+                                                    </u>
+                                                )}
                                                 <p>
-                                                    Multiple Modules {}
-                                                    | <b>Not available until</b> {assignment.available_from}
-                                                    | <b>Due</b> {assignment.due_date}
-                                                    | {assignment.points}pts
+                                                    Multiple Modules | <b>Not available until</b>{" "}
+                                                    {assignment.available_from} | <b>Due</b> {assignment.due_date} |{" "}
+                                                    {assignment.points}pts
                                                 </p>
                                             </div>
                                             <div className="col-2">
-                                                {currentUser.role === "FACULTY" ?
+                                                {currentUser.role === "FACULTY" && (
                                                     <div className="faculty-access float-end">
                                                         <AssignmentControls />
                                                         <DeleteAssignment
                                                             assignmentName={assignment.title}
                                                             assignmentId={assignment._id}
-                                                            deleteAssignment={ () => dispatch(deleteAssignment(assignment._id)) }
+                                                            deleteAssignment={() => dispatch(deleteAssignment(assignment._id))}
                                                         />
-                                                    </div> : <div></div>}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </li>
@@ -101,7 +125,6 @@ export default function Assignments(
                         </ul>
                     </li>
                 </ul>
-
             </div>
         </div>
     );
