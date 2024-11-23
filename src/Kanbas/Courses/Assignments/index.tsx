@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAssignments, deleteAssignment } from "./reducer";
 import Button from "./Button";
 import DeleteAssignment from "./DeleteAssignment";
-import AssignmentControls from "./AssignmentsControls";
+import AssignmentsControls from "./AssignmentsControls";
 import { useEffect } from "react";
 import {getAssignmentsFromCourse} from "./client";
 
@@ -110,7 +110,7 @@ export default function Assignments() {
                                             <div className="col-2">
                                                 {currentUser.role === "FACULTY" && (
                                                     <div className="faculty-access float-end">
-                                                        <AssignmentControls />
+                                                        <AssignmentsControls />
                                                         <DeleteAssignment
                                                             assignmentName={assignment.title}
                                                             assignmentId={assignment._id}
