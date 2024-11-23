@@ -56,6 +56,22 @@ export default function TOC() {
                     Jahanavi Sinha's GitHub
                 </a>
             </li>
+
+            <li className="nav-item">
+                <a id="wd-server" href="https://kanbas-node-server-app-xk22.onrender.com"
+                   className="nav-link">
+                    Server on Render
+                </a>
+            </li>
+
+
+            <li className="nav-item">
+                <a id="wd-github" href="https://github.com/jahanavisinha/kanbas-node-server-app"
+                   className="nav-link">
+                    Jahanavi Sinha's Server GitHub
+                </a>
+            </li>
+
         </ul>
     );
 }
