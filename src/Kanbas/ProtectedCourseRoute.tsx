@@ -25,17 +25,16 @@ export default function ProtectedCourseRoute({ children }: { children: any }) {
 
     useEffect(() => {
         getEnrollments();
-    }, [dispatch]);
+    }, [dispatch, enrollments]);
 
-    // Wait until enrollments are loaded
-    if (loading || enrollments.length === 0) {
+    if (loading) {
         return <div>Loading...</div>;
     }
     const userIsEnrolled = enrollments.find((e: any) => currentUser._id === e.user && cid === e.course);
     if (userIsEnrolled) {
         return children;
     } else {
-        alert("You are not enrolled in that course.");
+        alert("Sorry you are not enrolled in that course...");
         return <Navigate to="/Kanbas/Dashboard" />;
     }
 }
